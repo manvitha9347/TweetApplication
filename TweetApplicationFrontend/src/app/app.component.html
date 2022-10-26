@@ -1,0 +1,14 @@
+<ng-container
+  *ngIf="{
+    exsistingLoginIds: exsistingLoginIds$ | async,
+    login: login$ | async
+  } as data"
+>
+  <ng-template #loading>
+    <div class="loader"></div>
+  </ng-template>
+  <div *ngIf="wait; else loading">
+    <app-menu class="sticky" *ngIf="data.login"></app-menu>
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>

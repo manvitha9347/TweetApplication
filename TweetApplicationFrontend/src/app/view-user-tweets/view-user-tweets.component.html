@@ -1,0 +1,17 @@
+<div class="container"  style="margin-left: 35%;" *ngFor="let tweet of tweets">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{tweet?.userName}}</mat-card-title>
+      <mat-card-subtitle>{{tweet?.tweetPostTime}}</mat-card-subtitle>
+      <span class="logo-spacer"></span>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{tweet?.tweet}}
+        {{tweet?.tag}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+

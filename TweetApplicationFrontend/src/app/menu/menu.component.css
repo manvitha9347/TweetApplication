@@ -1,0 +1,12 @@
+.example-spacer {
+  /* flex: 1 1 auto; */
+  flex: 100;
+}
+
+.logout{
+  text-align: right;
+}
+
+.logo-spacer{
+  flex: 75;
+}

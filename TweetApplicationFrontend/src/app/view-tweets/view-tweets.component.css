@@ -1,0 +1,30 @@
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  background-color:aliceblue;
+}
+
+.example-header-image {
+  background-image: url('https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Free-Download.png');
+  background-size: cover;
+}
+
+.mat-icon-button{
+  float: right;
+  position: relative;
+  padding: auto;
+}
+
+.create{
+  float: right;
+  margin-right: 20px;
+}
+
+.logo-spacer{
+  flex: 75;
+}
+.viewTweets{
+  margin-left: -150px;
+  width: 100%;
+}
+

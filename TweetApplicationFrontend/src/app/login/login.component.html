@@ -1,0 +1,84 @@
+
+<ng-container>
+<div class="login-form" *ngIf="!isRegistrationClicked else registration">
+  <form (ngSubmit)="handelLogin()" #loginForm = "ngForm">
+    <h1>Login</h1>
+    <div class="content">
+      <div class="alert alert-danger" *ngIf="errorMessage">Incorrect Username or Password</div>
+      <div class="input-field">
+        <input type="text" placeholder="Username" #usernameRef="ngModel" name="username" [(ngModel)]="loginDetails.loginId" required>
+        <div class="alert alert-danger" *ngIf="usernameRef?.invalid && usernameRef.touched">
+          Username Required
+        </div>
+      </div>
+      <div class="input-field">
+        <input type="password" placeholder="Password" #passwordRef="ngModel" name="password" [(ngModel)]="loginDetails.password" required>
+        <div class="alert alert-danger" *ngIf="passwordRef?.invalid && passwordRef.touched">
+          Password Required
+        </div>
+      </div>
+      <a routerLink="/forgetpassword" class="link">Forgot Your Password?</a>
+    </div>
+    <div class="action">
+      <button type="button" (click)="navigateToRegistration()">Register</button>
+      <button type="submit" [disabled]="loginForm?.invalid">Sign in</button>
+    </div>
+  </form>
+</div>
+<ng-template #registration>
+  <div class="login-form" >
+    <form  [formGroup]= "registrationForm" (ngSubmit)="handelRegistration()">
+      <h1>Registration</h1>
+      <div class="content">
+        <div class="input-field">
+          <input type="text" placeholder="Firstname" formControlName="firstName">
+          <div class="alert alert-danger" *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
+            Firstname Required
+          </div>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="Lastname"  formControlName="lastName">
+          <div class="alert alert-danger" *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
+            Lastname Required
+          </div>
+        </div>
+        <div class="input-field">
+          <input type="email" placeholder="abc@email.com"  formControlName="email">
+          <div class="alert alert-danger" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+            Email Required
+          </div>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="User Id"  formControlName="loginId">
+          <div class="alert alert-danger" *ngIf="registrationForm.get('loginId')?.invalid && registrationForm.get('loginId')?.touched">
+            <span *ngIf="registrationForm.get('loginId')?.errors?.['loginIdValidator']">UserId already exist!! please try other name</span>
+            <span *ngIf="registrationForm.get('loginId')?.errors?.['required']">UserId Required</span>
+          </div>
+        </div>
+        <div class="input-field">
+          <input type="password" placeholder="Password"  formControlName="password">
+          <div class="alert alert-danger" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+            Password Required
+          </div>
+        </div>
+        <div class="input-field">
+          <input type="password" placeholder="Confirm Password" (keyup)="checkPasswordMatching(registrationForm.get('password')?.value,registrationForm.get('confirmPassword')?.value)"  (change)="checkPasswordMatching(registrationForm.get('password')?.value,registrationForm.get('confirmPassword')?.value)" formControlName="confirmPassword">
+          <div class="alert alert-danger"  *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched">
+            <div *ngIf="registrationForm.get('confirmPassword')?.errors?.['required']">Confirm Password Required</div>
+          </div>
+          <div class="alert alert-danger" *ngIf="showValidationError">Password and Confirm Password should match</div>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="Contact Number"  formControlName="contactNumber">
+          <div class="alert alert-danger"  *ngIf="registrationForm.get('contactNumber')?.invalid && registrationForm.get('contactNumber')?.touched">
+            Contact number Required
+          </div>
+        </div>
+        </div>
+        <div class="action">
+          <button [disabled]="this.registrationForm.invalid">Register</button>
+        </div>
+      </form>
+    </div>
+</ng-template>
+</ng-container>

@@ -1,0 +1,31 @@
+<button
+  style="margin-left: 2px"
+  color="primary"
+  mat-icon-button
+  (click)="commentCLicked()"
+>
+  <mat-icon>comment</mat-icon>
+  <span *ngIf="numberOfComments > 0">{{ numberOfComments }}</span>
+</button>
+<div *ngIf="showForm">
+  <form class="example-form" [formGroup]="commentForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="" formControlName="comment"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="handelComment('post')">
+      Post
+    </button>
+    <button mat-raised-button color="warn" (click)="handelComment('cancel')">
+      Cancel
+    </button>
+  </form>
+</div>
+<div *ngIf="showComments && showForm">
+  <span *ngFor="let comment of commentResponse">
+    <mat-card class="card"
+      ><b>{{ comment.userName }}</b
+      >: {{ comment.comment }}</mat-card
+    >
+  </span>
+</div>

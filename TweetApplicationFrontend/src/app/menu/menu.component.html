@@ -1,0 +1,47 @@
+<!-- <nav class="navbar bg-primary">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="">TweetApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="isLoginClicked">
+            <a class="nav-link active" aria-current="page" routerLink="login" (click)="emitEvent()">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="tweets">Tweets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="allusers">All Users</a>
+          </li>
+          <li class="nav-item" *ngIf="!isLoginClicked">
+            <a class="nav-link active" routerLink="login"  (click)="logoutClicked()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</nav>
+-->
+<p *ngIf="isLoginClicked">
+  <mat-toolbar color="primary">
+      <button style="margin-left: -20px;"  routerLink="home" mat-button aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+      </button>
+    <button mat-button routerLink="tweets">Tweets</button>
+    <button mat-button routerLink="allusers">All Users</button>
+    <span class="logo-spacer"></span>
+    <span>TweetApplication</span>
+    <span class="example-spacer"></span>
+    <span  class="logout">
+    <button mat-raised-button color="warn" (click)="logoutClicked()" routerLink="login" aria-label="Example icon-button with heart icon">
+      Logout
+    </button>
+  </span>
+    <!-- <button routerLink="login"  style="margin-left: 4px;" mat-raised-button color="accent" aria-label="Example icon-button with share icon">
+      Signin
+    </button> -->
+  </mat-toolbar>
+</p>

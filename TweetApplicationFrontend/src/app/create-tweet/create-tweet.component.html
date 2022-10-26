@@ -1,0 +1,18 @@
+
+<H3 mat-dialog-title>{{title}}</H3>
+<div mat-dialog-content>
+  <form [formGroup]="createTweet" (ngSubmit)="handelSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Tweet</mat-label>
+      <input matInput placeholder="Enter your tweet" formControlName="tweet">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tag</mat-label>
+      <input matInput placeholder="#tag" formControlName="tag">
+    </mat-form-field>
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="primary" type="submit" [disabled]="createTweet?.invalid">{{actionButton}}</button>
+      <button mat-raised-button color="warn" mat-dialog-close>Discard</button>
+    </div>
+  </form>
+</div>
