@@ -30,9 +30,9 @@ public class TweetServiceImpl implements TweetService {
 	}
 
 	@KafkaListener(groupId = "my-tweet-group",topics = "DemoTopic2",containerFactory = "kafkaListenerContainerFactory")
-	public Tweet kafkaListener(Tweet myTweet){
-		Tweet save = tweetRepo.save(myTweet);
-		return save;
+	public void kafkaListener(Tweet myTweet){
+		//Tweet save = tweetRepo.save(myTweet);
+		tweetRepo.delete(myTweet);
 	}
 	@Override
 	public List<TweetDto> getAllTweet() throws TweetsNotFoundException {
@@ -91,8 +91,8 @@ public class TweetServiceImpl implements TweetService {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Tweet tweetSaved = modelMapper.map(tweet, Tweet.class);
-		kafkaTemplate.send("DemoTopic2",tweetSaved);
-		return tweetSaved;
+		//kafkaTemplate.send("DemoTopic2",tweetSaved);
+		return tweetRepo.save(tweetSaved);
 	}
 
 	@Override
@@ -103,7 +103,8 @@ public class TweetServiceImpl implements TweetService {
 			existingTweet.setTweet(tweet.getTweet());
 			existingTweet.setTag(tweet.getTag());
 			existingTweet.setTweetPostTime(tweet.getTweetPostTime());
-			kafkaTemplate.send("DemoTopic2",existingTweet);
+			//kafkaTemplate.send("DemoTopic2",existingTweet);
+			tweetRepo.save(existingTweet);
 			UpdateTweetResponse updateTweetResponse = modelMapper.map(existingTweet, UpdateTweetResponse.class);
 			return updateTweetResponse;
 	}
@@ -111,7 +112,8 @@ public class TweetServiceImpl implements TweetService {
 	@Override
 	public void deleteTweetbyId(Integer tweetId, String userName){
 		Tweet tweet = tweetRepo.findById(tweetId).get();
-			tweetRepo.delete(tweet);
+		kafkaTemplate.send("DemoTopic2",tweet);
+
 
 	}
 }
